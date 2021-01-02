@@ -62,8 +62,15 @@ public class web_list {
     private List<comment> commentList=new ArrayList<comment>();
     private int good_count;
     private int comment_count;
+    private String content;
 
+    public String getContent() {
+        return content;
+    }
 
+    public void setContent(String content) {
+        this.content = content;
+    }
 
     public void setWeb_id(int web_id) {
         this.web_id = web_id;
