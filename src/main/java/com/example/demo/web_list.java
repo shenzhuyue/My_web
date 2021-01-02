@@ -2,6 +2,9 @@ package com.example.demo;
 
 
 import javax.persistence.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -59,6 +62,7 @@ public class web_list {
     private List<comment> commentList=new ArrayList<comment>();
     private int good_count;
     private int comment_count;
+
 
 
     public void setWeb_id(int web_id) {
