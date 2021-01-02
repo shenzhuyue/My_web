@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+</head>
+<body>
+<h1>微博主页</h1><hr/>
+<a href="/loginPage">
+    <button>登陆</button>
+</a>
+<a href="/logOut">
+    <button>注销</button>
+</a>
+<tr>
+
+</tr>
+<tr th:each="contact:${weblist}">
+    <td th:text=""></td>
+    <td th:text=""></td>
+</tr>
+
+
+
+</body>
+</html>
