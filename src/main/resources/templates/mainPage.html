@@ -18,7 +18,7 @@
     <a th:href="@{/mainPage(sortBy=subscribed)}"><button>只看关注</button></a>
 </p>
 
-<tr th:each="contact:${weblist}" th:object="contact">
+<tr th:each="contact:${weblist}">
     <td th:text="${contact.getWeb_id()}"></td>
     <td th:text="${contact.getUser_id()}"></td>
     <td th:text="${contact.getTime()}"></td>

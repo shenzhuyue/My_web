@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发帖</title>
+</head>
+<body>
+<h1>发帖</h1>
+<p>
+    <a href="/mainPage"><button>取消发帖</button></a>
+</p>
+
+<form name="addForm"  th:action="@{/add}" method="post" th:object="${web_list}">
+    <table class="table table-hover table-bordered">
+        <tr>
+            <th>微博内容</th>
+            <td><input type="text" name="" class="form-control" id="user-name-label" th:field="*{content}"/></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <center><input type="submit" value="发送"/></center>
+            </td>
+        </tr>
+    </table>
+</form>
+
+
+
+
+
+</body>
+</html>
