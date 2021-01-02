@@ -5,19 +5,29 @@
     <title>主页</title>
 </head>
 <body>
-<h1>微博主页</h1><hr/>
-<a href="/loginPage">
-    <button>登陆</button>
-</a>
-<a href="/logOut">
-    <button>注销</button>
-</a>
-<tr>
+<h1>微博主页</h1>
+<p>
+    <a href="/login"><button>登陆</button></a>
+    <a href="/logout"><button>注销</button></a>
+    <a href="/add"><button>发帖</button></a>
+</p>
+<p>
+    <a th:href="@{/mainPage(sortBy=time)}"><button>按时间排序</button></a>
+    <a th:href="@{/mainPage(sortBy=comments)}"><button>按评论数排序</button></a>
+    <a th:href="@{/mainPage(sortBy=upvotes)}"><button>按点赞数排序</button></a>
+    <a th:href="@{/mainPage(sortBy=subscribed)}"><button>只看关注</button></a>
+</p>
 
-</tr>
-<tr th:each="contact:${weblist}">
-    <td th:text=""></td>
-    <td th:text=""></td>
+<tr th:each="contact:${weblist}" th:object="contact">
+    <td th:text="${contact.getWeb_id()}"></td>
+    <td th:text="${contact.getUser_id()}"></td>
+    <td th:text="${contact.getTime()}"></td>
+    <td th:text="${contact.getContent()}"></td>
+    <td th:text="${contact.getComment_count()}"></td>
+    <a th:href="@{/addGood(webId=${contact.getWeb_id()})}"><button>赞</button></a>
+    <a th:href="@{/addComment(webId=${contact.getWeb_id()})}"><button>评论</button></a>
+    <a th:href="@{/subscribe(userId=${contact.getUser_id()})}"><button>关注作者</button></a>
+
 </tr>
 
 
