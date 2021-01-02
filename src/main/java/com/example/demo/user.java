@@ -1,37 +1,55 @@
 package com.example.demo;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class user{
+public class user {
+
+    //    设置一个主键id    主键自增策略
     @Id
-    private int user_id;
-    private String password;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long id;
     private String username;
+    private String password;
+    private String telephone;
 
+    protected user() {
 
-    public int getUser_id() {
-        return user_id;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public user(Long id,String username,String password,String telephone) {
+        this.id=id;
+        this.password=password;
+        this.username=username;
+        this.telephone=telephone;
     }
 
-    public String getPassword() {
-        return password;
+    public Long getId() {
+        return id;
     }
-
+    public void setId(Long id) {
+        this.id = id;
+    }
     public String getUsername() {
         return username;
     }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public void setUsername(String username) {
         this.username = username;
     }
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    public String getTelephone() {
+        return telephone;
+    }
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
 }

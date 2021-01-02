@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +27,8 @@ public class web_controllers {
     private userRepository UserRepository;
     @Autowired
     public void setWeblistRepository(weblistRepository WeblistRepository){this.WeblistRepository=WeblistRepository;}
+    @Autowired
+    public void setUserRepository(userRepository UserRepository){this.UserRepository=UserRepository;}
     private List<web_list> web_listList=new ArrayList<web_list>();
     private List<user> userList=new ArrayList<user>();
     @RequestMapping("/register")
@@ -34,29 +37,28 @@ public class web_controllers {
         ModelAndView modelAndView =new ModelAndView("register","userModel",model);
         return modelAndView;
     }
-    @PostMapping(value = "register/post")
+    @PostMapping("register/post")
     public  String register(user temp){
         userList.add(temp);
         UserRepository.save(temp);
-        return "redircet:/login";
+        return "redirect:/login";
     }
 
-    @RequestMapping({"/", "/login"})
-    public String Login(Model model) {
-        return "login";
+    @RequestMapping({"/"})
+    public ModelAndView Login(Model model) {
+        return new ModelAndView("/login");
     }
-    @PostMapping(value = "/login/flag")
-    public String Login(HttpServletRequest request, HttpServletResponse response,
-                        @RequestParam("admin") String admin,
-                        @RequestParam("password") String password) throws IOException {
+    @PostMapping("/login.action")
+    public String Login(@RequestParam("admin") String admin,@RequestParam("password") String password) throws IOException {
+        user User =new user();
+        User.setUsername(admin);
+        User.setPassword(password);
 
-
-        if (admin.equals("Erii") && password.equals("2018211523")) {
-            HttpSession session = request.getSession();
-            session.setAttribute("user", "2018211523");
-            return "redirect:/mainPage";
-        } else {
+        user loginuser=UserRepository.findByUsernameAndPassword(User.getUsername(),User.getPassword());
+        if(loginuser == null) {
             return "redirect:/login";
+        }else {
+            return "redirect:/mainPage";
         }
     }
 

@@ -16,7 +16,7 @@ import java.util.Map;
 @Entity
 public class web_list {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int web_id;
     private int user_id;
     private String time;

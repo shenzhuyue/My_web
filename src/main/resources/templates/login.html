@@ -3,20 +3,6 @@
 <head>
     <meta charset="utf-8">
     <title>通讯录列表页面</title>
-    <script>
-        function login(){
-            var admin = document.loginForm.admin.value;
-            var password=document.loginForm.password.value;
-            if(admin=="Erii"&&password=="2018211523"){
-                alert("登录成功");
-                return true;
-            }
-            else{
-                alert("登录失败，请检查用户名和密码");
-                return false;
-            }
-        }
-    </script>
     <style>
 
         input{
@@ -101,7 +87,7 @@
     </style>
 </head>
 <body>
-<form name="loginForm" class="form-signin" role="form" method="post" th:action="@{/login/flag}">
+<form action="" method="post" th:action="@{/login.action}">
     <div class="right">
         <h1 style="text-align: center">个人通讯录管理系统-登录</h1>
         <div class="column1">隐藏</div>
