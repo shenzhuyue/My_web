@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>通讯录列表页面</title>
+    <script>
+        function login(){
+            var admin = document.loginForm.admin.value;
+            var password=document.loginForm.password.value;
+            if(admin=="Erii"&&password=="2018211523"){
+                alert("登录成功");
+                return true;
+            }
+            else{
+                alert("登录失败，请检查用户名和密码");
+                return false;
+            }
+        }
+    </script>
+    <style>
+
+        input{
+            height: 30px;
+            width: 14em;
+            font-size: 20px;
+        }
+        body{
+            background-image:url('background.jpg');
+            background-repeat:no-repeat;
+        }
+        .right {
+            float: right;
+            right: 0px;
+            width: 500px;
+            border: 2px solid black;
+            border-radius: 16px;
+            padding: 10px;
+        }
+        .username{
+            float: left;
+            left: 0px;
+            width: 100%;
+            border:  1px solid red;
+            border-radius: 16px;
+            padding: 10px;
+            margin-top:10px;
+            margin-bottom:10px;
+        }
+        .password{
+            float: left;
+            left: 0px;
+            width: 100%;
+            border: 1px solid red;
+            border-radius: 16px;
+            padding: 10px;
+            margin-top:10px;
+            margin-bottom:10px;
+        }
+        .submit{
+            text-align: center;
+            color: red;
+            font-size: 20px;
+            float: left;
+            left: 0px;
+            width: 100%;
+            border: 1px solid red;
+            border-radius: 16px;
+            padding: 10px;
+            margin-top:10px;
+            margin-bottom:10px;
+        }
+        .column1 {
+            visibility:hidden;
+            float: left;
+            width: 10%;
+        }
+        .column2 {
+            float: left;
+            width: 80%;
+        }
+        .column3{
+            float: left;
+            width: 20%;
+        }
+        table
+        {
+            border-collapse:collapse;
+        }
+        table,th, td
+        {
+            border: 1px solid black;
+        }
+        table
+        {
+            width:100%;
+        }
+        th
+        {
+            height:50px;
+        }
+    </style>
+</head>
+<body>
+<form name="loginForm" class="form-signin" role="form" method="post" th:action="@{/login/flag}">
+    <div class="right">
+        <h1 style="text-align: center">个人通讯录管理系统-登录</h1>
+        <div class="column1">隐藏</div>
+        <div class="column2">
+            <div class="username">
+                <b><div class="column3">用户名：</div><input name="admin"  type="text" placeholder="Erii"/></b>
+            </div>
+
+            <div class="password">
+                <b><div class="column3">密码：</div><input name="password" type="password" placeholder="2018211523"/></b>
+            </div>
+            <div class="submit">
+                <span><center><button onclick="login()" type="submit">登录</button></center></span>
+            </div>
+        </div>
+
+        <div class="column1">隐藏</div>
+    </div>
+</form>
+</body>
+</html>

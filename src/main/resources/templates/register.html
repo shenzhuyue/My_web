@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>通讯录列表添加页面</title>
+    <style>
+        input{
+            height: 30px;
+            width: 14em;
+            font-size: 20px;
+        }
+        body{
+            background-image:url('background.jpg');
+            background-repeat:no-repeat;
+        }
+        .column1 {
+            visibility:hidden;
+            float: left;
+            width: 35%;
+        }
+        .column2 {
+            float: left;
+            width: 30%;
+        }
+        table
+        {
+            border-collapse:collapse;
+        }
+        table,th, td
+        {
+            border: 1px solid black;
+        }
+        table
+        {
+            width:100%;
+        }
+        th
+        {
+            height:50px;
+        }
+    </style>
+</head>
+<body>
+<div class="column1">隐藏</div>
+<div class="column2">
+    <form name="myform"  th:action="@{/register/post}" method="post" th:object="${user}">
+        <table class="table table-hover table-bordered">
+            <tr>
+                <th>用户名</th>
+                <td><input type="text" name="" class="form-control" id="user-name-label" th:field="*{username}"/></td>
+            </tr>
+            <tr>
+                <th>密码</th>
+                <td><input type="text" name="" class="form-control" id="password-always-checkbox"  th:field="*{password}"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <center><input type="submit" value="注册" class="btn btn-primary" id="reset"/></center>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<div class="column1">隐藏</div>
+
+
+</body>
+</html>
