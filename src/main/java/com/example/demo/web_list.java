@@ -13,8 +13,6 @@ public class web_list {
     private int webid;
     private Long userid;
     private String time;
-    @OneToMany(targetEntity = comment.class)
-    private List<comment> commentList=new ArrayList<comment>();
     private int goodcount;
     private int commentcount;
     private String content;
@@ -51,9 +49,7 @@ public class web_list {
         return goodcount;
     }
 
-    public List<comment> getCommentList() {
-        return commentList;
-    }
+
 
     public String getTime() {
         return time;
@@ -63,9 +59,7 @@ public class web_list {
         this.commentcount = comment_count;
     }
 
-    public void setCommentList(List<comment> commentList) {
-        this.commentList = commentList;
-    }
+
 
     public void setGoodcount(int good_count) {
         this.goodcount = good_count;

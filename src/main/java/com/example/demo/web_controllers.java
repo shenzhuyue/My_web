@@ -143,12 +143,11 @@ public class web_controllers {
     }
 
     private commentRepository CommentRepository;
-
     @Autowired
     public void setCommentRepository(commentRepository CommentRepository) {
         this.CommentRepository = CommentRepository;
     }
-
+    public void setCommentRepository(){}
     private List<comment> commentlist = new ArrayList<comment>();
 
 
@@ -176,8 +175,8 @@ public class web_controllers {
         String user = (String) session.getAttribute("user");
         user now_user = UserRepository.findByUsername(user);
         temp.setUserid(now_user.getId().intValue());
-       commentlist.add(temp);
-       CommentRepository.save(temp);
+        commentlist.add(temp);
+        CommentRepository.save(temp);
         return "/comments/{(int)session.getAttribute(\"nowwebid\")}";
     }
 
