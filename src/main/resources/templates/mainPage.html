@@ -36,7 +36,7 @@
 </p>
 <tr th:each="contact:${weblist}">
     <td th:text="${contact.getWebid()}"></td>
-    <td th:text="${contact.getUserid()}"></td>
+    <td th:text="${contact.getUsername()}"></td>
     <td th:text="${contact.getTime()}"></td>
     <td th:text="${contact.getContent()}"></td>
     <td th:text="${contact.getCommentcount()}"></td>
