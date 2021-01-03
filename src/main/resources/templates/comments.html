@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>评论区</title>
+</head>
+<body>
+<h1>评论区</h1>
+<p>
+<form action="" method="request" th:action="@{/mainPage}">
+    <button type="submit">返回主页</button>
+</form>
+</p>
+<div th:object="${post}">
+    <td th:text="*{getContent()}"></td>
+    <tr th:each="contact:*{getCommentList}">
+        <td th:text="${contact.getUser_id()}"></td>
+        <td th:text="${contact.getTime()}"></td>
+        <td th:text="${contact.getComments()}"></td>
+    </tr>
+</div>
+
+<form name="commentForm"  th:action="@{/comments.action}" method="post" th:object="${comment}">
+    <table class="table table-hover table-bordered">
+        <tr>
+            <th>评论内容</th>
+            <td><input type="text" name="" class="form-control" id="user-name-label" th:field="*{comments}"/></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <center><input type="submit" value="发送"/></center>
+            </td>
+        </tr>
+    </table>
+</form>
+
+
+
+
+
+</body>
+</html>

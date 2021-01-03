@@ -22,10 +22,10 @@
 
 </p>
 <p>
-    <a th:href="@{/mainPage(sortBy=time)}"><button>按时间排序</button></a>
-    <a th:href="@{/mainPage(sortBy=comments)}"><button>按评论数排序</button></a>
-    <a th:href="@{/mainPage(sortBy=upvotes)}"><button>按点赞数排序</button></a>
-    <a th:href="@{/mainPage(sortBy=subscribed)}"><button>只看关注</button></a>
+    <a th:href="@{/mainPage/time}"><button>按时间排序</button></a>
+    <a th:href="@{/mainPage/comments}"><button>按评论数排序</button></a>
+    <a th:href="@{/mainPage/upvotes}"><button>按点赞数排序</button></a>
+    <a th:href="@{/mainPage/subscribed}"><button>只看关注</button></a>
 </p>
 
 <tr th:each="contact:${weblist}">
@@ -34,9 +34,9 @@
     <td th:text="${contact.getTime()}"></td>
     <td th:text="${contact.getContent()}"></td>
     <td th:text="${contact.getComment_count()}"></td>
-    <a th:href="@{/addGood(webId=${contact.getWeb_id()})}"><button>赞</button></a>
-    <a th:href="@{/comment(webId=${contact.getWeb_id()})}"><button>评论</button></a>
-    <a th:href="@{/subscribe(userId=${contact.getUser_id()})}"><button>关注作者</button></a>
+    <a th:href="@{/addGood/${contact.getWeb_id()}}"><button>赞</button></a>
+    <a th:href="@{/comment/${contact.getWeb_id()}}"><button>评论</button></a>
+    <a th:href="@{/subscribe/${contact.getUser_id()}}"><button>关注作者</button></a>
 
 </tr>
 
