@@ -163,6 +163,7 @@ public class web_controllers {
         session.setAttribute("nowwebid",nowweb.getWebid());
         model.addAttribute("commentlist", commentlist);
         model.addAttribute("nowweb", nowweb);
+        model.addAttribute("comment", new comment());
         ModelAndView modelAndView = new ModelAndView("comments", "commentModel", model);
         return modelAndView;
     }
