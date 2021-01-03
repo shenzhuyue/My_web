@@ -13,7 +13,7 @@
 </p>
 <div th:object="${nowweb}">
     <td th:text="*{getContent()}"></td>
-    <tr th:each="contact:*{commentList}">
+    <tr th:each="contact:*{getCommentList}">
         <td th:text="${contact.getUserid()}"></td>
         <td th:text="${contact.getComment_time()}"></td>
         <td th:text="${contact.getComments()}"></td>
