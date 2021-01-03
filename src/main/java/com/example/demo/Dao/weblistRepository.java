@@ -9,5 +9,6 @@ import java.util.List;
 public interface weblistRepository extends CrudRepository<web_list,Integer> {
     List<web_list> findAll();
     List<web_list> findAll(Sort sort);
+    List<web_list> findAllByUserid(int usrid);
 }
 

@@ -134,15 +134,18 @@ public class web_controllers {
         return modelAndView;
     }
 
-    @RequestMapping("/mainPage/subscribeds")//----------------------------------------------------------------------------------
+    @RequestMapping("/mainPage/subscribed")//----------------------------------------------------------------------------------
     public ModelAndView subscribeds(HttpServletRequest request,Model model) {
-
+        web_listList.clear();
         HttpSession session = request.getSession();
         model.addAttribute("username",session.getAttribute("user"));
         model.addAttribute("loggedin",session.getAttribute("loggedin"));
         user nowuser=UserRepository.findByUsername((String) session.getAttribute("user"));
-
-        web_listList = WeblistRepository.findAll(Sort.by(Sort.Direction.DESC, "goodcount").descending());
+        int nowuserid=nowuser.getId();
+        List<user> attention=nowuser.getAttention();
+        for(user atuser:attention){
+            web_listList.addAll(WeblistRepository.findAllByUserid(atuser.getId()));
+        }
         model.addAttribute("weblist", web_listList);
         ModelAndView modelAndView = new ModelAndView("mainPage", "weblistModel", model);
         return modelAndView;
@@ -155,6 +158,7 @@ public class web_controllers {
         String user = (String) session.getAttribute("user");
         user now_user = UserRepository.findByUsername(user);
         temp.setUserid(now_user.getId());
+        temp.setUsername(now_user.getUsername());
         Date date = new Date();
         temp.setTime(date.toString());
         temp.setCommentcount(0);

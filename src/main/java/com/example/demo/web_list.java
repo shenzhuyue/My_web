@@ -12,10 +12,19 @@ public class web_list {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int webid;
     private int userid;
+    private String username;
     private String time;
     private int goodcount;
     private int commentcount;
     private String content;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getContent() {
         return content;
