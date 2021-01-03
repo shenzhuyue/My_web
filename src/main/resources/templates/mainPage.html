@@ -6,6 +6,13 @@
 </head>
 <body>
 <h1>微博主页</h1>
+<hr>
+<div th:if="${loggedin} eq false">
+    <td th:text="'当前身份：游客'"></td>
+</div>
+<div th:if="${loggedin} eq true">
+    <td th:text="'当前身份：用户 '+${username}"></td>
+</div>
 <p>
 
 <form action="" method="request" th:action="@{/login}">
