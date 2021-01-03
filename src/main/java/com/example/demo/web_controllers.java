@@ -91,7 +91,10 @@ public class web_controllers {
     }
 
     @RequestMapping("/mainPage")
-    public ModelAndView Index(Model model) {
+    public ModelAndView Index(HttpServletRequest request,Model model) {
+        HttpSession session = request.getSession();
+        model.addAttribute("username",session.getAttribute("user"));
+        model.addAttribute("loggedin",session.getAttribute("loggedin"));
         web_listList = WeblistRepository.findAll(Sort.by(Sort.Direction.DESC, "time").ascending());
         model.addAttribute("weblist", web_listList);
         ModelAndView modelAndView = new ModelAndView("mainPage", "weblistModel", model);
@@ -99,7 +102,10 @@ public class web_controllers {
     }
 
     @RequestMapping("/mainPage/time")
-    public ModelAndView TIME(Model model) {
+    public ModelAndView TIME(HttpServletRequest request,Model model) {
+        HttpSession session = request.getSession();
+        model.addAttribute("username",session.getAttribute("user"));
+        model.addAttribute("loggedin",session.getAttribute("loggedin"));
         web_listList = WeblistRepository.findAll(Sort.by(Sort.Direction.DESC, "time").descending());
         model.addAttribute("weblist", web_listList);
         ModelAndView modelAndView = new ModelAndView("mainPage", "weblistModel", model);
@@ -107,7 +113,10 @@ public class web_controllers {
     }
 
     @RequestMapping("/mainPage/comments")
-    public ModelAndView Comments(Model model) {
+    public ModelAndView Comments(HttpServletRequest request,Model model) {
+        HttpSession session = request.getSession();
+        model.addAttribute("username",session.getAttribute("user"));
+        model.addAttribute("loggedin",session.getAttribute("loggedin"));
         web_listList = WeblistRepository.findAll(Sort.by(Sort.Direction.DESC, "commentcount").descending());
         model.addAttribute("weblist", web_listList);
         ModelAndView modelAndView = new ModelAndView("mainPage", "weblistModel", model);
@@ -115,12 +124,30 @@ public class web_controllers {
     }
 
     @RequestMapping("/mainPage/upvotes")
-    public ModelAndView upvotes(Model model) {
+    public ModelAndView upvotes(HttpServletRequest request,Model model) {
+        HttpSession session = request.getSession();
+        model.addAttribute("username",session.getAttribute("user"));
+        model.addAttribute("loggedin",session.getAttribute("loggedin"));
         web_listList = WeblistRepository.findAll(Sort.by(Sort.Direction.DESC, "goodcount").descending());
         model.addAttribute("weblist", web_listList);
         ModelAndView modelAndView = new ModelAndView("mainPage", "weblistModel", model);
         return modelAndView;
     }
+
+    @RequestMapping("/mainPage/subscribeds")//----------------------------------------------------------------------------------
+    public ModelAndView subscribeds(HttpServletRequest request,Model model) {
+
+        HttpSession session = request.getSession();
+        model.addAttribute("username",session.getAttribute("user"));
+        model.addAttribute("loggedin",session.getAttribute("loggedin"));
+        user nowuser=UserRepository.findByUsername((String) session.getAttribute("user"));
+
+        web_listList = WeblistRepository.findAll(Sort.by(Sort.Direction.DESC, "goodcount").descending());
+        model.addAttribute("weblist", web_listList);
+        ModelAndView modelAndView = new ModelAndView("mainPage", "weblistModel", model);
+        return modelAndView;
+    }
+
 
     @PostMapping("/addPost.action")
     public String Web_list(web_list temp, HttpServletRequest request, HttpServletResponse response) {
