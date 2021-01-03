@@ -45,7 +45,7 @@ public class web_controllers {
     public String register(user temp) {
         userList.add(temp);
         UserRepository.save(temp);
-        return "/login";
+        return "redirect:/login";
     }
 
     @PostMapping("/login.action")
@@ -155,31 +155,34 @@ public class web_controllers {
     @PostMapping("/addPost.action")
     public String Web_list(web_list temp, HttpServletRequest request, HttpServletResponse response) {
 
+        if(temp.getImagepath()!=""){
+            File originalFile = new File(temp.getImagepath());
 
-        File originalFile = new File(temp.getImagepath());
+            String newpath="D:\\学习\\大三上\\web基础\\BigWork\\src\\main\\resources\\static\\"+imagecount+".jpg";
 
-        String newpath="D:\\学习\\大三上\\web基础\\BigWork\\src\\main\\resources\\templates\\"+imagecount+".jpg";
+            String newpath2=""+imagecount+".jpg";
 
-        String newpath2=""+imagecount+".jpg";
-        imagecount++;
-        File result = new File(newpath);
-        try {
-            FileInputStream in = new FileInputStream(originalFile);
-            FileOutputStream out = new FileOutputStream(result);// 指定要写入的图片
-            int n = 0;// 每次读取的字节长度
-            byte[] bb = new byte[1024];// 存储每次读取的内容
-            while ((n = in.read(bb)) != -1) {
-                out.write(bb, 0, n);// 将读取的内容，写入到输出流当中
+            File result = new File(newpath);
+            try {
+                FileInputStream in = new FileInputStream(originalFile);
+                FileOutputStream out = new FileOutputStream(result);// 指定要写入的图片
+                int n = 0;// 每次读取的字节长度
+                byte[] bb = new byte[1024];// 存储每次读取的内容
+                while ((n = in.read(bb)) != -1) {
+                    out.write(bb, 0, n);// 将读取的内容，写入到输出流当中
+                }
+                out.close();
+                in.close();
             }
-            out.close();
-            in.close();
+            catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            temp.setImagepath(newpath2);
+
         }
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        temp.setImagepath(newpath2);
+        imagecount++;
         HttpSession session = request.getSession();
         String user = (String) session.getAttribute("user");
         user now_user = UserRepository.findByUsername(user);
