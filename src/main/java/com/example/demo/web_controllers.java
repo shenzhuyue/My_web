@@ -24,43 +24,16 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class web_controllers {
     private weblistRepository WeblistRepository;
-    private userRepository UserRepository;
     @Autowired
     public void setWeblistRepository(weblistRepository WeblistRepository){this.WeblistRepository=WeblistRepository;}
-    @Autowired
-    public void setUserRepository(userRepository UserRepository){this.UserRepository=UserRepository;}
+
     private List<web_list> web_listList=new ArrayList<web_list>();
-    private List<user> userList=new ArrayList<user>();
-    @RequestMapping("/register")
-    public ModelAndView Register(Model model){
-        model.addAttribute("user",new user());
-        ModelAndView modelAndView =new ModelAndView("register","userModel",model);
-        return modelAndView;
-    }
-    @PostMapping("register/post")
-    public  String register(user temp){
-        userList.add(temp);
-        UserRepository.save(temp);
-        return "redirect:/login";
-    }
 
     @RequestMapping({"/"})
     public ModelAndView Login(Model model) {
         return new ModelAndView("/login");
     }
-    @PostMapping("/login.action")
-    public String Login(@RequestParam("admin") String admin,@RequestParam("password") String password) throws IOException {
-        user User =new user();
-        User.setUsername(admin);
-        User.setPassword(password);
 
-        user loginuser=UserRepository.findByUsernameAndPassword(User.getUsername(),User.getPassword());
-        if(loginuser == null) {
-            return "redirect:/login";
-        }else {
-            return "redirect:/mainPage";
-        }
-    }
 
     @RequestMapping("/mainPage")
     public ModelAndView Index(Model model){

@@ -87,25 +87,32 @@
     </style>
 </head>
 <body>
-<form action="" method="post" th:action="@{/login.action}">
+
     <div class="right">
         <h1 style="text-align: center">个人通讯录管理系统-登录</h1>
         <div class="column1">隐藏</div>
         <div class="column2">
-            <div class="username">
-                <b><div class="column3">用户名：</div><input name="admin"  type="text" placeholder="Erii"/></b>
-            </div>
+            <form action="" method="post" th:action="@{/login.action}">
+                <div class="username">
+                    <b><div class="column3">用户名：</div><input name="admin"  type="text" placeholder="Erii"/></b>
+                </div>
 
-            <div class="password">
-                <b><div class="column3">密码：</div><input name="password" type="password" placeholder="2018211523"/></b>
-            </div>
-            <div class="submit">
-                <span><center><button onclick="login()" type="submit">登录</button></center></span>
-            </div>
+                <div class="password">
+                    <b><div class="column3">密码：</div><input name="password" type="password" placeholder="2018211523"/></b>
+                </div>
+                <div class="submit">
+                    <span><center><button onclick="login()" type="submit">登录</button></center></span>
+                </div>
+            </form>
+            <form action="" method="request" th:action="@{/register}">
+                <div class="submit">
+                    <span><center><button onclick="login()" type="submit">注册</button></center></span>
+                </div>
+            </form>
         </div>
-
         <div class="column1">隐藏</div>
     </div>
-</form>
+
+
 </body>
 </html>

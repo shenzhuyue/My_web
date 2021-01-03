@@ -7,9 +7,11 @@
 <body>
 <h1>微博主页</h1>
 <p>
-    <a href="/login"><button>登陆</button></a>
-    <a href="/logoutUser"><button>注销</button></a>
-    <a href="/add"><button>发帖</button></a>
+    <a th:action="@{/mainPage/login}" method="request"  ><button>登陆</button></a>
+    <a href="/logout"><button>注销</button></a>
+    <a th:action="@{/mainPage/add}" method="request" ><button>发帖</button></a>
+
+
 </p>
 <p>
     <a th:href="@{/mainPage(sortBy=time)}"><button>按时间排序</button></a>
