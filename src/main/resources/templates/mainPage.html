@@ -48,7 +48,7 @@
     <td th:text="${contact.getContent()}"></td>
     <td th:text="${contact.getCommentcount()}"></td>
     <div>
-        <img th:src="'file:///'+${contact.getImagepath()}"><img>
+        <img th:src="${contact.getImagepath()}"><img>
     </div>
 
     <td th:text="${contact.getGoodcount()}"></td>

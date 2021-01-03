@@ -3,7 +3,7 @@ import com.example.demo.Dao.weblistRepository;
 import com.example.demo.Dao.userRepository;
 import com.example.demo.Dao.commentRepository;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -151,9 +151,35 @@ public class web_controllers {
         return modelAndView;
     }
 
-
+    public int imagecount=1;
     @PostMapping("/addPost.action")
     public String Web_list(web_list temp, HttpServletRequest request, HttpServletResponse response) {
+
+
+        File originalFile = new File(temp.getImagepath());
+
+        String newpath="D:\\学习\\大三上\\web基础\\BigWork\\src\\main\\resources\\templates\\"+imagecount+".jpg";
+
+        String newpath2=""+imagecount+".jpg";
+        imagecount++;
+        File result = new File(newpath);
+        try {
+            FileInputStream in = new FileInputStream(originalFile);
+            FileOutputStream out = new FileOutputStream(result);// 指定要写入的图片
+            int n = 0;// 每次读取的字节长度
+            byte[] bb = new byte[1024];// 存储每次读取的内容
+            while ((n = in.read(bb)) != -1) {
+                out.write(bb, 0, n);// 将读取的内容，写入到输出流当中
+            }
+            out.close();
+            in.close();
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        temp.setImagepath(newpath2);
         HttpSession session = request.getSession();
         String user = (String) session.getAttribute("user");
         user now_user = UserRepository.findByUsername(user);
