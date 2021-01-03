@@ -210,6 +210,7 @@ public class web_controllers {
         String user = (String) session.getAttribute("user");
         user now_user = UserRepository.findByUsername(user);
         temp.setUserid(now_user.getId());
+        temp.setUsername(now_user.getUsername());
         web_list nowweb=WeblistRepository.findById(nowID).get();
         nowweb.setCommentcount(nowweb.getCommentcount()+1);
         WeblistRepository.save(nowweb);

@@ -12,8 +12,17 @@ public class comment{
     private int commentid;
     private int webid;
     private int userid;
+    private String username;
     private String comments;
     private String comment_time;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public int getCommentid() {
         return commentid;
