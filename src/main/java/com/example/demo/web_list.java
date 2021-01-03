@@ -18,7 +18,7 @@ public class web_list {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int web_id;
-    private int user_id;
+    private Long user_id;
     private String time;
     @OneToMany(targetEntity = comment.class)
     private List<comment> commentList=new ArrayList<comment>();
@@ -38,7 +38,7 @@ public class web_list {
         this.web_id = web_id;
     }
 
-    public void setUser_id(int user_id) {
+    public void setUser_id(Long user_id) {
         this.user_id = user_id;
     }
 
@@ -46,7 +46,7 @@ public class web_list {
         return web_id;
     }
 
-    public int getUser_id() {
+    public Long getUser_id() {
         return user_id;
     }
 
