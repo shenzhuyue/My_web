@@ -11,9 +11,9 @@
     <button type="submit">返回主页</button>
 </form>
 </p>
-<div th:object="${nowweb}">
-    <td th:text="*{getContent()}"></td>
-    <tr th:each="contact:*{commentList}">
+<div >
+    <td th:text="${nowweb.getContent()}"></td>
+    <tr th:each="contact:${commentlist}">
         <td th:text="${contact.getUserid()}"></td>
         <td th:text="${contact.getComment_time()}"></td>
         <td th:text="${contact.getComments()}"></td>
