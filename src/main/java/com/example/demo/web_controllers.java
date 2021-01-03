@@ -47,13 +47,15 @@ public class web_controllers {
         user User =new user();
         User.setUsername(admin);
         User.setPassword(password);
-
         user loginuser=UserRepository.findByUsernameAndPassword(User.getUsername(),User.getPassword());
+        HttpSession session = request.getSession();
         if(loginuser == null) {
+            session.setAttribute("flag", 0);
             return "/login";
         }else {
-            HttpSession session = request.getSession();
+
             session.setAttribute("user", admin);
+            session.setAttribute("flag", 1);
             return "redirect:/mainPage";
         }
     }
