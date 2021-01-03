@@ -1,6 +1,7 @@
 package com.example.demo;
 import com.example.demo.Dao.weblistRepository;
 import com.example.demo.Dao.userRepository;
+import com.example.demo.Dao.commentRepository;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,38 +26,46 @@ import javax.servlet.http.HttpSession;
 public class web_controllers {
 
     private userRepository UserRepository;
+
     @Autowired
-    public void setUserRepository(userRepository UserRepository){this.UserRepository=UserRepository;}
-    private List<user> userList=new ArrayList<user>();
+    public void setUserRepository(userRepository UserRepository) {
+        this.UserRepository = UserRepository;
+    }
+
+    private List<user> userList = new ArrayList<user>();
+
     @RequestMapping("/register")
-    public ModelAndView Register(Model model){
-        model.addAttribute("user",new user());
-        ModelAndView modelAndView =new ModelAndView("register","userModel",model);
+    public ModelAndView Register(Model model) {
+        model.addAttribute("user", new user());
+        ModelAndView modelAndView = new ModelAndView("register", "userModel", model);
         return modelAndView;
     }
+
     @PostMapping("register/post")
-    public  String register(user temp){
+    public String register(user temp) {
         userList.add(temp);
         UserRepository.save(temp);
         return "/login";
     }
+
     @PostMapping("/login.action")
-    public String Login(HttpServletRequest request, HttpServletResponse response,@RequestParam("admin") String admin,@RequestParam("password") String password) throws IOException {
-        user User =new user();
+    public String Login(HttpServletRequest request, HttpServletResponse response, @RequestParam("admin") String admin, @RequestParam("password") String password) throws IOException {
+        user User = new user();
         User.setUsername(admin);
         User.setPassword(password);
-        user loginuser=UserRepository.findByUsernameAndPassword(User.getUsername(),User.getPassword());
+        user loginuser = UserRepository.findByUsernameAndPassword(User.getUsername(), User.getPassword());
         HttpSession session = request.getSession();
-        if(loginuser == null) {
+        if (loginuser == null) {
             session.setAttribute("flag", 0);
             return "/login";
-        }else {
+        } else {
 
             session.setAttribute("user", admin);
             session.setAttribute("flag", 1);
             return "redirect:/mainPage";
         }
     }
+
     @RequestMapping("logout")
     public String Logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
@@ -64,56 +74,59 @@ public class web_controllers {
     }
 
 
-
-
-
     private weblistRepository WeblistRepository;
+
     @Autowired
-    public void setWeblistRepository(weblistRepository WeblistRepository){this.WeblistRepository=WeblistRepository;}
-    private List<web_list> web_listList=new ArrayList<web_list>();
-    @RequestMapping({"/","/login"})
+    public void setWeblistRepository(weblistRepository WeblistRepository) {
+        this.WeblistRepository = WeblistRepository;
+    }
+
+    private List<web_list> web_listList = new ArrayList<web_list>();
+
+    @RequestMapping({"/", "/login"})
     public ModelAndView Login(Model model) {
         return new ModelAndView("/login");
     }
 
     @RequestMapping("/mainPage")
-    public ModelAndView Index(Model model){
-        web_listList=WeblistRepository.findAll();
-        model.addAttribute("weblist",web_listList);
-        ModelAndView modelAndView =new ModelAndView("mainPage","weblistModel",model);
+    public ModelAndView Index(Model model) {
+        web_listList = WeblistRepository.findAll();
+        model.addAttribute("weblist", web_listList);
+        ModelAndView modelAndView = new ModelAndView("mainPage", "weblistModel", model);
         return modelAndView;
     }
+
     @RequestMapping("/mainPage/time")
-    public ModelAndView TIME(Model model){
-        web_listList=WeblistRepository.findAll(Sort.by(Sort.Direction.DESC,"time").descending());
-        model.addAttribute("weblist",web_listList);
-        ModelAndView modelAndView =new ModelAndView("mainPage","weblistModel",model);
+    public ModelAndView TIME(Model model) {
+        web_listList = WeblistRepository.findAll(Sort.by(Sort.Direction.DESC, "time").descending());
+        model.addAttribute("weblist", web_listList);
+        ModelAndView modelAndView = new ModelAndView("mainPage", "weblistModel", model);
         return modelAndView;
     }
 
     @RequestMapping("/mainPage/comments")
-    public ModelAndView Comments(Model model){
-        web_listList=WeblistRepository.findAll(Sort.by(Sort.Direction.DESC,"commentcount").descending());
-        model.addAttribute("weblist",web_listList);
-        ModelAndView modelAndView =new ModelAndView("mainPage","weblistModel",model);
+    public ModelAndView Comments(Model model) {
+        web_listList = WeblistRepository.findAll(Sort.by(Sort.Direction.DESC, "commentcount").descending());
+        model.addAttribute("weblist", web_listList);
+        ModelAndView modelAndView = new ModelAndView("mainPage", "weblistModel", model);
         return modelAndView;
     }
 
     @RequestMapping("/mainPage/upvotes")
-    public ModelAndView upvotes(Model model){
-        web_listList=WeblistRepository.findAll(Sort.by(Sort.Direction.DESC,"goodcount").descending());
-        model.addAttribute("weblist",web_listList);
-        ModelAndView modelAndView =new ModelAndView("mainPage","weblistModel",model);
+    public ModelAndView upvotes(Model model) {
+        web_listList = WeblistRepository.findAll(Sort.by(Sort.Direction.DESC, "goodcount").descending());
+        model.addAttribute("weblist", web_listList);
+        ModelAndView modelAndView = new ModelAndView("mainPage", "weblistModel", model);
         return modelAndView;
     }
 
     @PostMapping("/addPost.action")
-    public  String Web_list(web_list temp,HttpServletRequest request, HttpServletResponse response){
+    public String Web_list(web_list temp, HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
-        String user = (String)session.getAttribute("user");
-        user now_user= UserRepository.findByUsername(user);
+        String user = (String) session.getAttribute("user");
+        user now_user = UserRepository.findByUsername(user);
         temp.setUserid(now_user.getId());
-        Date date=new Date();
+        Date date = new Date();
         temp.setTime(date.toString());
         temp.setCommentcount(0);
         temp.setGoodcount(0);
@@ -121,11 +134,36 @@ public class web_controllers {
         WeblistRepository.save(temp);
         return "/mainPage";
     }
+
     @RequestMapping("/addPost")
-    public ModelAndView addPost(Model model){
-        model.addAttribute("web_list",new web_list());
-        ModelAndView modelAndView =new ModelAndView("addPost","PostModel",model);
+    public ModelAndView addPost(Model model) {
+        model.addAttribute("web_list", new web_list());
+        ModelAndView modelAndView = new ModelAndView("addPost", "PostModel", model);
         return modelAndView;
     }
 
+    private commentRepository CommentRepository;
+
+    @Autowired
+    public void setCommentRepository(commentRepository CommentRepository) {
+        this.CommentRepository = CommentRepository;
+    }
+
+    private List<comment> commentlist = new ArrayList<comment>();
+
+
+    @RequestMapping("/comment/{webid}")
+    public ModelAndView comments(Model model, HttpServletRequest request, HttpServletResponse response, @PathVariable("webid") Integer webid) throws IOException {
+        user User = new user();
+        web_list nowweb = new web_list();
+        comment nowcomment = new comment();
+        user loginuser = UserRepository.findByUsernameAndPassword(User.getUsername(), User.getPassword());
+        nowweb = WeblistRepository.findById(webid).get();
+        commentlist = CommentRepository.findAllByWebid(nowweb.getWebid());
+        HttpSession session = request.getSession();
+        model.addAttribute("commentlist", commentlist);
+        model.addAttribute("nowweb", nowweb);
+        ModelAndView modelAndView = new ModelAndView("comments", "commentModel", model);
+        return modelAndView;
+    }
 }

@@ -9,17 +9,17 @@ import javax.persistence.Id;
 public class comment{
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int web_id;
-    private int user_id;
+    private int webid;
+    private int userid;
     private String comments;
     private String comment_time;
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserid() {
+        return userid;
     }
 
-    public int getWeb_id() {
-        return web_id;
+    public int getWebid() {
+        return webid;
     }
 
     public String getComment_time() {
@@ -38,11 +38,11 @@ public class comment{
         this.comments = comments;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserid(int user_id) {
+        this.userid = user_id;
     }
 
-    public void setWeb_id(int web_id) {
-        this.web_id = web_id;
+    public void setWebid(int web_id) {
+        this.webid = web_id;
     }
 }
