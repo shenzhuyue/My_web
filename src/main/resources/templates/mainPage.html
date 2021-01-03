@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>微博主页</title>
+    <style>
+        .box{
+            width: 10000px;
+            height:10000px;
+            overflow: visible;
+        }
+    </style>
 </head>
 <body>
 <h1>微博主页</h1>
@@ -40,7 +47,10 @@
     <td th:text="${contact.getTime()}"></td>
     <td th:text="${contact.getContent()}"></td>
     <td th:text="${contact.getCommentcount()}"></td>
-    <img th:src="${contact.getImagepath()}"><img>
+    <div>
+        <img th:src="'file:///'+${contact.getImagepath()}"><img>
+    </div>
+
     <td th:text="${contact.getGoodcount()}"></td>
     <a th:href="@{'/addGood/'+${contact.getWebid()}}"><button>赞</button></a>
     <a th:href="@{'/comment/'+${contact.getWebid()}}"><button>评论</button></a>
