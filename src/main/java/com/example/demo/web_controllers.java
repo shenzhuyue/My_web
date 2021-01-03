@@ -57,11 +57,13 @@ public class web_controllers {
         HttpSession session = request.getSession();
         if (loginuser == null) {
             session.setAttribute("flag", 0);
+            session.setAttribute("loggedin",false);
             return "/login";
         } else {
 
             session.setAttribute("user", admin);
             session.setAttribute("flag", 1);
+            session.setAttribute("loggedin",true);
             return "redirect:/mainPage";
         }
     }
@@ -69,7 +71,7 @@ public class web_controllers {
     @RequestMapping("logout")
     public String Logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
-        session.setAttribute("user", 0);
+        session.setAttribute("loggedin",false);
         return "/login";
     }
 
@@ -193,5 +195,16 @@ public class web_controllers {
         WeblistRepository.save(nowweb);
         return "redirect:/mainPage";
     }
+
+    @RequestMapping("/subscribe/{id}")
+    public String attention(HttpServletRequest request, HttpServletResponse response,@PathVariable("id") Integer userid){
+        HttpSession session = request.getSession();
+        String nowusername=(String)session.getAttribute("user");
+        user nowuser=UserRepository.findByUsername(nowusername);
+        nowuser.getAttention().add(UserRepository.findById(userid).get());
+
+        return "redirect:/mainPage";
+    }
+
 
 }

@@ -1,9 +1,8 @@
 package com.example.demo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class user {
@@ -15,6 +14,16 @@ public class user {
     private String username;
     private String password;
     private String telephone;
+    @OneToMany(targetEntity = user.class)
+    private List<user> attention=new ArrayList<user>();
+
+    public List<user> getAttention() {
+        return attention;
+    }
+
+    public void setAttention(List<user> attention) {
+        this.attention = attention;
+    }
 
     protected user() {
 
