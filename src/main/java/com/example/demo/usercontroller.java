@@ -54,5 +54,11 @@ public class usercontroller {
             return "redirect:/mainPage";
         }
     }
+    @RequestMapping("logout")
+    public String Logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+            HttpSession session = request.getSession();
+            session.setAttribute("user", 0);
+            return "/login";
+    }
 
 }

@@ -9,18 +9,24 @@
 <p>
 
 <form action="" method="request" th:action="@{/login}">
-    <button onclick="login()" type="submit">登录</button>
+    <button type="submit">登录</button>
 </form>
 
-    <a href="/logout"><button>注销</button></a>
-
+<form action="" method="request" th:action="@{/logout}">
+    <button type="submit">注销</button>
+</form>
 
 <form action="" method="request" th:action="@{/addPost}">
-<button onclick="login()" type="submit">发帖</button>
+<button  type="submit">发帖</button>
 </form>
 
 </p>
-
+<p>
+    <a th:href="@{/mainPage(sortBy=time)}"><button>按时间排序</button></a>
+    <a th:href="@{/mainPage(sortBy=comments)}"><button>按评论数排序</button></a>
+    <a th:href="@{/mainPage(sortBy=upvotes)}"><button>按点赞数排序</button></a>
+    <a th:href="@{/mainPage(sortBy=subscribed)}"><button>只看关注</button></a>
+</p>
 
 <tr th:each="contact:${weblist}">
     <td th:text="${contact.getWeb_id()}"></td>
@@ -34,12 +40,7 @@
 
 </tr>
 
-<p>
-    <a th:href="@{/mainPage(sortBy=time)}"><button>按时间排序</button></a>
-    <a th:href="@{/mainPage(sortBy=comments)}"><button>按评论数排序</button></a>
-    <a th:href="@{/mainPage(sortBy=upvotes)}"><button>按点赞数排序</button></a>
-    <a th:href="@{/mainPage(sortBy=subscribed)}"><button>只看关注</button></a>
-</p>
+
 
 
 
