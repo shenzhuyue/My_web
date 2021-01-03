@@ -11,11 +11,11 @@
     <button type="submit">返回主页</button>
 </form>
 </p>
-<div th:object="${post}">
+<div th:object="${nowweb}">
     <td th:text="*{getContent()}"></td>
-    <tr th:each="contact:*{getCommentList}">
-        <td th:text="${contact.getUser_id()}"></td>
-        <td th:text="${contact.getTime()}"></td>
+    <tr th:each="contact:*{commentList}">
+        <td th:text="${contact.getUserid()}"></td>
+        <td th:text="${contact.getComment_time()}"></td>
         <td th:text="${contact.getComments()}"></td>
     </tr>
 </div>
