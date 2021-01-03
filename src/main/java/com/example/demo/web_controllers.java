@@ -177,10 +177,21 @@ public class web_controllers {
         String user = (String) session.getAttribute("user");
         user now_user = UserRepository.findByUsername(user);
         temp.setUserid(now_user.getId().intValue());
+        web_list nowweb=WeblistRepository.findById(nowID).get();
+        nowweb.setCommentcount(nowweb.getCommentcount()+1);
+        WeblistRepository.save(nowweb);
         commentlist.add(temp);
         CommentRepository.save(temp);
         return "redirect:/mainPage";
     }
-
+    @RequestMapping("/addGood/{id}")
+    public String addGood(HttpServletRequest request, HttpServletResponse response,@PathVariable("id") Integer webid){
+        HttpSession session = request.getSession();
+        session.setAttribute("nowwebid",webid);
+        web_list nowweb=WeblistRepository.findById(webid).get();
+        nowweb.setGoodcount(nowweb.getGoodcount()+1);
+        WeblistRepository.save(nowweb);
+        return "redirect:/mainPage";
+    }
 
 }
