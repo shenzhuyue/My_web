@@ -10,7 +10,7 @@
     <a href="/mainPage"><button>取消发帖</button></a>
 </p>
 
-<form name="addForm"  th:action="@{/add}" method="post" th:object="${web_list}">
+<form name="addForm"  th:action="@{/addPost.action}" method="post" th:object="${web_list}">
     <table class="table table-hover table-bordered">
         <tr>
             <th>微博内容</th>

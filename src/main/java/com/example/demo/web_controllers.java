@@ -29,7 +29,7 @@ public class web_controllers {
 
     private List<web_list> web_listList=new ArrayList<web_list>();
 
-    @RequestMapping({"/"})
+    @RequestMapping({"/","/login"})
     public ModelAndView Login(Model model) {
         return new ModelAndView("/login");
     }
@@ -43,5 +43,18 @@ public class web_controllers {
         return modelAndView;
     }
 
+
+    @PostMapping("/addPost.action")
+    public  String Web_list(web_list temp){
+        web_listList.add(temp);
+        WeblistRepository.save(temp);
+        return "/mainPage";
+    }
+    @RequestMapping("/addPost")
+    public ModelAndView addPost(Model model){
+        model.addAttribute("web_list",new web_list());
+        ModelAndView modelAndView =new ModelAndView("addPost","PostModel",model);
+        return modelAndView;
+    }
 
 }
