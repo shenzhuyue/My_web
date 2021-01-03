@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import net.bytebuddy.TypeCache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -15,10 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.jws.soap.SOAPBinding;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -78,6 +75,7 @@ public class web_controllers {
     public ModelAndView Login(Model model) {
         return new ModelAndView("/login");
     }
+
     @RequestMapping("/mainPage")
     public ModelAndView Index(Model model){
         web_listList=WeblistRepository.findAll();
@@ -85,16 +83,40 @@ public class web_controllers {
         ModelAndView modelAndView =new ModelAndView("mainPage","weblistModel",model);
         return modelAndView;
     }
+    @RequestMapping("/mainPage/time")
+    public ModelAndView TIME(Model model){
+        web_listList=WeblistRepository.findAll(Sort.by(Sort.Direction.DESC,"time").descending());
+        model.addAttribute("weblist",web_listList);
+        ModelAndView modelAndView =new ModelAndView("mainPage","weblistModel",model);
+        return modelAndView;
+    }
+
+    @RequestMapping("/mainPage/comments")
+    public ModelAndView Comments(Model model){
+        web_listList=WeblistRepository.findAll(Sort.by(Sort.Direction.DESC,"commentcount").descending());
+        model.addAttribute("weblist",web_listList);
+        ModelAndView modelAndView =new ModelAndView("mainPage","weblistModel",model);
+        return modelAndView;
+    }
+
+    @RequestMapping("/mainPage/upvotes")
+    public ModelAndView upvotes(Model model){
+        web_listList=WeblistRepository.findAll(Sort.by(Sort.Direction.DESC,"goodcount").descending());
+        model.addAttribute("weblist",web_listList);
+        ModelAndView modelAndView =new ModelAndView("mainPage","weblistModel",model);
+        return modelAndView;
+    }
+
     @PostMapping("/addPost.action")
     public  String Web_list(web_list temp,HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
         String user = (String)session.getAttribute("user");
         user now_user= UserRepository.findByUsername(user);
-        temp.setUser_id(now_user.getId());
+        temp.setUserid(now_user.getId());
         Date date=new Date();
         temp.setTime(date.toString());
-        temp.setComment_count(0);
-        temp.setGood_count(0);
+        temp.setCommentcount(0);
+        temp.setGoodcount(0);
         web_listList.add(temp);
         WeblistRepository.save(temp);
         return "/mainPage";
