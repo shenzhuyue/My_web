@@ -20,11 +20,11 @@
     </tr>
 </div>
 
-<form name="commentForm"  th:action="@{/comments.action}" method="post" th:object="${comment}">
+<form name="commentForm"  th:action="@{/comments.action}" method="post">
     <table class="table table-hover table-bordered">
         <tr>
             <th>评论内容</th>
-            <td><input type="text" name="" class="form-control" id="user-name-label" th:field="*{comments}"/></td>
+            <td><input type="text" name="" class="form-control" id="user-name-label" th:field="${commentlist[0].comments}"/></td>
         </tr>
         <tr>
             <td colspan="2">
