@@ -17,6 +17,15 @@ public class web_list {
     private int goodcount;
     private int commentcount;
     private String content;
+    private String imagepath;
+
+    public String getImagepath() {
+        return imagepath;
+    }
+
+    public void setImagepath(String imagepath) {
+        this.imagepath = imagepath;
+    }
 
     public String getUsername() {
         return username;

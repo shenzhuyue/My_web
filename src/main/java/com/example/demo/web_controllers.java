@@ -233,9 +233,15 @@ public class web_controllers {
         HttpSession session = request.getSession();
         String nowusername=(String)session.getAttribute("user");
         user nowuser=UserRepository.findByUsername(nowusername);
-        nowuser.getAttention().add(UserRepository.findById(userid).get());
+        List<user> nowattention=nowuser.getAttention();
+        nowattention.add(UserRepository.findById(userid).get());
+        nowuser.setAttention(nowattention);
+        UserRepository.save(nowuser);
         return "redirect:/mainPage";
     }
+
+
+
 
 
 }
