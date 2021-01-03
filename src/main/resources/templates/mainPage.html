@@ -40,6 +40,7 @@
     <td th:text="${contact.getTime()}"></td>
     <td th:text="${contact.getContent()}"></td>
     <td th:text="${contact.getCommentcount()}"></td>
+    <td th:text="${contact.getGoodcount()}"></td>
     <a th:href="@{'/addGood/'+${contact.getWebid()}}"><button>赞</button></a>
     <a th:href="@{'/comment/'+${contact.getWebid()}}"><button>评论</button></a>
     <a th:href="@{'/subscribe/'+${contact.getUserid()}}"><button>关注作者</button></a>
