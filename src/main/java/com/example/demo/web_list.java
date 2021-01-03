@@ -11,7 +11,7 @@ public class web_list {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int webid;
-    private Long userid;
+    private int userid;
     private String time;
     private int goodcount;
     private int commentcount;
@@ -29,7 +29,7 @@ public class web_list {
         this.webid = web_id;
     }
 
-    public void setUserid(Long user_id) {
+    public void setUserid(int user_id) {
         this.userid = user_id;
     }
 
@@ -37,7 +37,7 @@ public class web_list {
         return webid;
     }
 
-    public Long getUserid() {
+    public int getUserid() {
         return userid;
     }
 

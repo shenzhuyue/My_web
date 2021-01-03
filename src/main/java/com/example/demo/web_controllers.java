@@ -178,7 +178,7 @@ public class web_controllers {
         temp.setComment_time(date.toString());
         String user = (String) session.getAttribute("user");
         user now_user = UserRepository.findByUsername(user);
-        temp.setUserid(now_user.getId().intValue());
+        temp.setUserid(now_user.getId());
         web_list nowweb=WeblistRepository.findById(nowID).get();
         nowweb.setCommentcount(nowweb.getCommentcount()+1);
         WeblistRepository.save(nowweb);

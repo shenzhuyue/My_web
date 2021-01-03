@@ -10,7 +10,7 @@ public class user {
     //    设置一个主键id    主键自增策略
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     private String username;
     private String password;
     private String telephone;
@@ -25,21 +25,11 @@ public class user {
         this.attention = attention;
     }
 
-    protected user() {
 
-    }
-
-    public user(Long id,String username,String password,String telephone) {
-        this.id=id;
-        this.password=password;
-        this.username=username;
-        this.telephone=telephone;
-    }
-
-    public Long getId() {
+    public int getId() {
         return id;
     }
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
     public String getUsername() {
