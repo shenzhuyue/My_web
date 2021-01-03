@@ -72,7 +72,7 @@ public class web_controllers {
     public String Logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
         session.setAttribute("loggedin",false);
-        return "/login";
+        return "redirect:/mainPage";
     }
 
 
@@ -202,7 +202,6 @@ public class web_controllers {
         String nowusername=(String)session.getAttribute("user");
         user nowuser=UserRepository.findByUsername(nowusername);
         nowuser.getAttention().add(UserRepository.findById(userid).get());
-
         return "redirect:/mainPage";
     }
 
