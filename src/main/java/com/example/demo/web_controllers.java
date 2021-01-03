@@ -161,9 +161,25 @@ public class web_controllers {
         nowweb = WeblistRepository.findById(webid).get();
         commentlist = CommentRepository.findAllByWebid(nowweb.getWebid());
         HttpSession session = request.getSession();
+        session.setAttribute("nowwebid",nowweb.getWebid());
         model.addAttribute("commentlist", commentlist);
         model.addAttribute("nowweb", nowweb);
         ModelAndView modelAndView = new ModelAndView("comments", "commentModel", model);
         return modelAndView;
     }
+    @PostMapping("/comments.action")
+    public String commentaction(comment temp, HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        temp.setWebid((int)session.getAttribute("nowwebid"));
+        Date date = new Date();
+        temp.setComment_time(date.toString());
+        String user = (String) session.getAttribute("user");
+        user now_user = UserRepository.findByUsername(user);
+        temp.setUserid(now_user.getId().intValue());
+       commentlist.add(temp);
+       CommentRepository.save(temp);
+        return "/comments/{(int)session.getAttribute(\"nowwebid\")}";
+    }
+
+
 }
