@@ -90,7 +90,7 @@ public class web_controllers {
 
     @RequestMapping("/mainPage")
     public ModelAndView Index(Model model) {
-        web_listList = WeblistRepository.findAll();
+        web_listList = WeblistRepository.findAll(Sort.by(Sort.Direction.DESC, "time").ascending());
         model.addAttribute("weblist", web_listList);
         ModelAndView modelAndView = new ModelAndView("mainPage", "weblistModel", model);
         return modelAndView;
@@ -132,7 +132,7 @@ public class web_controllers {
         temp.setGoodcount(0);
         web_listList.add(temp);
         WeblistRepository.save(temp);
-        return "/mainPage";
+        return "redirect:/mainPage";
     }
 
     @RequestMapping("/addPost")
@@ -151,8 +151,8 @@ public class web_controllers {
     private List<comment> commentlist = new ArrayList<comment>();
 
 
-    @RequestMapping("/comment/{webid}")
-    public ModelAndView comments(Model model, HttpServletRequest request, HttpServletResponse response, @PathVariable("webid") Integer webid) throws IOException {
+    @RequestMapping("/comment/{id}")
+    public ModelAndView comments(Model model, HttpServletRequest request, HttpServletResponse response, @PathVariable("id") Integer webid) throws IOException {
         user User = new user();
         web_list nowweb = new web_list();
         comment nowcomment = new comment();
@@ -171,6 +171,7 @@ public class web_controllers {
     public String commentaction(comment temp, HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         temp.setWebid((int)session.getAttribute("nowwebid"));
+        int nowID=(int)session.getAttribute("nowwebid");
         Date date = new Date();
         temp.setComment_time(date.toString());
         String user = (String) session.getAttribute("user");
@@ -178,7 +179,7 @@ public class web_controllers {
         temp.setUserid(now_user.getId().intValue());
         commentlist.add(temp);
         CommentRepository.save(temp);
-        return "/comments/{(int)session.getAttribute(\"nowwebid\")}";
+        return "redirect:/mainPage";
     }
 
 

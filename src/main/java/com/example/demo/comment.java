@@ -9,10 +9,19 @@ import javax.persistence.Id;
 public class comment{
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private int commentid;
     private int webid;
     private int userid;
     private String comments;
     private String comment_time;
+
+    public int getCommentid() {
+        return commentid;
+    }
+
+    public void setCommentid(int commentid) {
+        this.commentid = commentid;
+    }
 
     public int getUserid() {
         return userid;
