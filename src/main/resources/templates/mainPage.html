@@ -95,6 +95,7 @@
     <a th:href="@{/mainPage/comments}"><button>按评论数排序</button></a>
     <a th:href="@{/mainPage/upvotes}"><button>按点赞数排序</button></a>
     <a th:href="@{/mainPage/subscribed}"><button>只看关注</button></a>
+
 </div></tr>
     <tr th:each="contact:${weblist}">
         <td th:text="'web id:'+${contact.getWebid()}"></td>
@@ -113,6 +114,9 @@
             <a th:href="@{'/subscribe/'+${contact.getUserid()}}"><button>关注作者</button></a></td>
 
     </tr>
+    <tr><a th:href="@{/mainPage/prepage}"><button>上一页</button></a>
+        <a th:href="@{/mainPage/first}"><button>回到首页</button></a>
+        <a th:href="@{/mainPage/nextpage}"><button>下一页</button></a></tr>
 </table>
 
 </body>

@@ -81,6 +81,7 @@ public class web_controllers {
 
     private weblistRepository WeblistRepository;
     private int nowpage=0;
+    private int pagenum=5;
     @Autowired
     public void setWeblistRepository(weblistRepository WeblistRepository) {
         this.WeblistRepository = WeblistRepository;
@@ -99,7 +100,32 @@ public class web_controllers {
         model.addAttribute("username",session.getAttribute("user"));
         model.addAttribute("loggedin",session.getAttribute("loggedin"));
         web_listList = WeblistRepository.findAll(Sort.by(Sort.Direction.DESC, "time").ascending());
-        model.addAttribute("weblist", web_listList);
+        if(web_listList.size()>nowpage*pagenum&&nowpage>=0){
+            if (web_listList.size()>nowpage*pagenum){
+                if (web_listList.size()<=pagenum*(nowpage+1)){
+                    model.addAttribute("weblist", web_listList.subList(nowpage*pagenum,web_listList.size()));
+                }
+                else {
+                    model.addAttribute("weblist", web_listList.subList(nowpage*pagenum,(nowpage+1)*pagenum));
+                }
+            }
+
+        }
+        else {
+            nowpage=0;
+            if(web_listList.size()>nowpage*pagenum&&nowpage>=0){
+                if (web_listList.size()>nowpage*pagenum){
+                    if (web_listList.size()<=pagenum*(nowpage+1)){
+                        model.addAttribute("weblist", web_listList.subList(nowpage*pagenum,web_listList.size()));
+                    }
+                    else {
+                        model.addAttribute("weblist", web_listList.subList(nowpage*pagenum,(nowpage+1)*pagenum));
+                    }
+                }
+
+            }
+            else model.addAttribute("weblist", web_listList);
+        }
         ModelAndView modelAndView = new ModelAndView("mainPage", "weblistModel", model);
         return modelAndView;
     }
@@ -110,7 +136,32 @@ public class web_controllers {
         model.addAttribute("username",session.getAttribute("user"));
         model.addAttribute("loggedin",session.getAttribute("loggedin"));
         web_listList = WeblistRepository.findAll(Sort.by(Sort.Direction.DESC, "time").descending());
-        model.addAttribute("weblist", web_listList);
+        if(web_listList.size()>nowpage*pagenum&&nowpage>=0){
+            if (web_listList.size()>nowpage*pagenum){
+                if (web_listList.size()<=pagenum*(nowpage+1)){
+                    model.addAttribute("weblist", web_listList.subList(nowpage*pagenum,web_listList.size()));
+                }
+                else {
+                    model.addAttribute("weblist", web_listList.subList(nowpage*pagenum,(nowpage+1)*pagenum));
+                }
+            }
+
+        }
+        else {
+            nowpage=0;
+            if(web_listList.size()>nowpage*pagenum&&nowpage>=0){
+                if (web_listList.size()>nowpage*pagenum){
+                    if (web_listList.size()<=pagenum*(nowpage+1)){
+                        model.addAttribute("weblist", web_listList.subList(nowpage*pagenum,web_listList.size()));
+                    }
+                    else {
+                        model.addAttribute("weblist", web_listList.subList(nowpage*pagenum,(nowpage+1)*pagenum));
+                    }
+                }
+
+            }
+            else model.addAttribute("weblist", web_listList);
+        }
         ModelAndView modelAndView = new ModelAndView("mainPage", "weblistModel", model);
         return modelAndView;
     }
@@ -121,7 +172,32 @@ public class web_controllers {
         model.addAttribute("username",session.getAttribute("user"));
         model.addAttribute("loggedin",session.getAttribute("loggedin"));
         web_listList = WeblistRepository.findAll(Sort.by(Sort.Direction.DESC, "commentcount").descending());
-        model.addAttribute("weblist", web_listList);
+        if(web_listList.size()>nowpage*pagenum&&nowpage>=0){
+            if (web_listList.size()>nowpage*pagenum){
+                if (web_listList.size()<=pagenum*(nowpage+1)){
+                    model.addAttribute("weblist", web_listList.subList(nowpage*pagenum,web_listList.size()));
+                }
+                else {
+                    model.addAttribute("weblist", web_listList.subList(nowpage*pagenum,(nowpage+1)*pagenum));
+                }
+            }
+
+        }
+        else {
+            nowpage=0;
+            if(web_listList.size()>nowpage*pagenum&&nowpage>=0){
+                if (web_listList.size()>nowpage*pagenum){
+                    if (web_listList.size()<=pagenum*(nowpage+1)){
+                        model.addAttribute("weblist", web_listList.subList(nowpage*pagenum,web_listList.size()));
+                    }
+                    else {
+                        model.addAttribute("weblist", web_listList.subList(nowpage*pagenum,(nowpage+1)*pagenum));
+                    }
+                }
+
+            }
+            else model.addAttribute("weblist", web_listList);
+        }
         ModelAndView modelAndView = new ModelAndView("mainPage", "weblistModel", model);
         return modelAndView;
     }
@@ -132,7 +208,32 @@ public class web_controllers {
         model.addAttribute("username",session.getAttribute("user"));
         model.addAttribute("loggedin",session.getAttribute("loggedin"));
         web_listList = WeblistRepository.findAll(Sort.by(Sort.Direction.DESC, "goodcount").descending());
-        model.addAttribute("weblist", web_listList);
+        if(web_listList.size()>nowpage*pagenum&&nowpage>=0){
+            if (web_listList.size()>nowpage*pagenum){
+                if (web_listList.size()<=pagenum*(nowpage+1)){
+                    model.addAttribute("weblist", web_listList.subList(nowpage*pagenum,web_listList.size()));
+                }
+                else {
+                    model.addAttribute("weblist", web_listList.subList(nowpage*pagenum,(nowpage+1)*pagenum));
+                }
+            }
+
+        }
+        else {
+            nowpage=0;
+            if(web_listList.size()>nowpage*pagenum&&nowpage>=0){
+                if (web_listList.size()>nowpage*pagenum){
+                    if (web_listList.size()<=pagenum*(nowpage+1)){
+                        model.addAttribute("weblist", web_listList.subList(nowpage*pagenum,web_listList.size()));
+                    }
+                    else {
+                        model.addAttribute("weblist", web_listList.subList(nowpage*pagenum,(nowpage+1)*pagenum));
+                    }
+                }
+
+            }
+            else model.addAttribute("weblist", web_listList);
+        }
         ModelAndView modelAndView = new ModelAndView("mainPage", "weblistModel", model);
         return modelAndView;
     }
@@ -149,11 +250,50 @@ public class web_controllers {
         for(user atuser:attention){
             web_listList.addAll(WeblistRepository.findAllByUserid(atuser.getId()));
         }
-        model.addAttribute("weblist", web_listList);
+        if(web_listList.size()>nowpage*pagenum&&nowpage>=0){
+            if (web_listList.size()>nowpage*pagenum){
+                if (web_listList.size()<=pagenum*(nowpage+1)){
+                    model.addAttribute("weblist", web_listList.subList(nowpage*pagenum,web_listList.size()));
+                }
+                else {
+                    model.addAttribute("weblist", web_listList.subList(nowpage*pagenum,(nowpage+1)*pagenum));
+                }
+            }
+
+        }
+        else {
+            nowpage=0;
+            if(web_listList.size()>nowpage*pagenum&&nowpage>=0){
+                if (web_listList.size()>nowpage*pagenum){
+                    if (web_listList.size()<=pagenum*(nowpage+1)){
+                        model.addAttribute("weblist", web_listList.subList(nowpage*pagenum,web_listList.size()));
+                    }
+                    else {
+                        model.addAttribute("weblist", web_listList.subList(nowpage*pagenum,(nowpage+1)*pagenum));
+                    }
+                }
+
+            }
+            else model.addAttribute("weblist", web_listList);
+        }
         ModelAndView modelAndView = new ModelAndView("mainPage", "weblistModel", model);
         return modelAndView;
     }
-
+    @RequestMapping("/mainPage/prepage")
+    public String prepage(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        nowpage--;
+        return "redirect:/mainPage";
+    }
+    @RequestMapping("/mainPage/nextpage")
+    public String nextpage(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        nowpage++;
+        return "redirect:/mainPage";
+    }
+    @RequestMapping("/mainPage/first")
+    public String first(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        nowpage=0;
+        return "redirect:/mainPage";
+    }
     public int imagecount=1;
     @PostMapping("/addPost.action")
     public String Web_list(web_list temp, HttpServletRequest request, HttpServletResponse response) {
