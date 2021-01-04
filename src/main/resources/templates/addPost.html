@@ -3,29 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <title>发帖</title>
+    <style>
+
+        input{
+            height: 30px;
+            width: 14em;
+            font-size: 20px;
+        }
+        body{
+            background-image:url('addPost.jpg');
+            background-repeat:no-repeat;
+        }
+        h1
+        {
+            color:greenyellow;
+            text-align:center;
+        }
+        .submit{
+            text-align: center;
+            color: red;
+            font-size: 10px;
+            float: right;
+            left: 0px;
+            width: 5%;
+            border: 1px solid red;
+            border-radius: 16px;
+            padding: 10px;
+            margin-top:10px;
+            margin-bottom:10px;
+        }
+        .left {
+            float: left;
+            right: 0px;
+            width: 500px;
+            border: 2px solid black;
+            border-radius: 16px;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
 <h1>发帖</h1>
 <p>
+<div class="submit">
     <a href="/mainPage"><button>取消发帖</button></a>
+</div>
 </p>
 
 <form name="addForm"  th:action="@{/addPost.action}" method="post" th:object="${web_list}">
-    <table class="table table-hover table-bordered">
-        <tr>
-            <th>微博内容</th>
-            <td><input type="text" name="" class="form-control" id="user-name-label" th:field="*{content}"/></td>
-        </tr>
-        <tr>
-            <th>上传图片本地路径：</th>
-            <td><input type="text" name="" class="form-control" th:field="*{imagepath}"/></td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <center><input type="submit" value="发送"/></center>
-            </td>
-        </tr>
-    </table>
+    <div class="left">
+        <table class="table table-hover table-bordered">
+            <tr>
+                <th>微博内容</th>
+                <td><input type="text" name="" class="form-control" id="user-name-label" th:field="*{content}"/></td>
+            </tr>
+            <tr>
+                <th>上传图片本地路径：</th>
+                <td><input type="text" name="" class="form-control" th:field="*{imagepath}"/></td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <center><input type="submit" value="发送"/></center>
+                </td>
+            </tr>
+        </table>
+    </div>
 </form>
 
 

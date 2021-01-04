@@ -3,21 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <title>评论区</title>
+    <style>
+
+        input{
+            height: 30px;
+            width: 14em;
+            font-size: 20px;
+        }
+        body{
+            background-image:url('comments.jpg');
+            background-repeat:no-repeat;
+        }
+        h1
+        {
+            color:red;
+            text-align:center;
+        }
+        .submit{
+            text-align: center;
+            color: red;
+            font-size: 10px;
+            float: right;
+            left: 0px;
+            width: 5%;
+            border: 1px solid red;
+            border-radius: 16px;
+            padding: 10px;
+            margin-top:10px;
+            margin-bottom:10px;
+        }
+        table
+        {
+            border-collapse:collapse;
+        }
+        table,th, td
+        {
+            border: 1px solid black;
+        }
+        table
+        {
+            width:30%;
+        }
+        th
+        {
+            height:50px;
+        }
+    </style>
+
 </head>
 <body>
 <h1>评论区</h1>
 <p>
 <form action="" method="request" th:action="@{/mainPage}">
-    <button type="submit">返回主页</button>
+    <div class="submit">
+        <button type="submit">返回主页</button>
+    </div>
 </form>
 </p>
 <div th:object="${nowweb}">
     <td th:text="${nowweb.getContent()}"></td>
     <tr th:each="contact:${commentlist}">
-        <td th:text="${contact.getUsername()}"></td>
-        <td th:text="${contact.getComment_time()}"></td>
-        <td th:text="${contact.getComments()}"></td>
-
+        <p>
+        <td th:text="'用户名:'+${contact.getUsername()}"></td>
+        <td th:text="'时间:'+${contact.getComment_time()}"></td>
+        <td th:text="'正文:'+${contact.getComments()}"></td>
+        </p>
     </tr>
 </div>
 

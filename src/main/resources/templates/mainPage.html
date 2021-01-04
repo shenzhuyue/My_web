@@ -4,6 +4,50 @@
     <meta charset="UTF-8">
     <title>微博主页</title>
     <style>
+        input{
+            height: 30px;
+            width: 14em;
+            font-size: 20px;
+        }
+        body{
+            background-image:url('mainPage.jpg');
+            background-repeat:no-repeat;
+        }
+        h1
+        {
+            color:orange;
+            text-align:center;
+        }
+        .column1 {
+            float: right;
+            width: 5%;
+        }
+        .button{
+            text-align: center;
+            color: red;
+            font-size: 10px;
+            float: left;
+            left: 0px;
+            width: 30%;
+            border: 1px solid red;
+            border-radius: 16px;
+            padding: 10px;
+            margin-top:10px;
+            margin-bottom:10px;
+        }
+        .submit{
+            text-align: center;
+            color: red;
+            font-size: 10px;
+            float: right;
+            left: 0px;
+            width: 100%;
+            border: 1px solid red;
+            border-radius: 16px;
+            padding: 10px;
+            margin-top:10px;
+            margin-bottom:10px;
+        }
         .box{
             width: 10000px;
             height:10000px;
@@ -22,39 +66,54 @@
 </div>
 <p>
 
-<form action="" method="request" th:action="@{/login}">
-    <button type="submit">登录</button>
-</form>
+<div class="column1">
+    <form action="" method="request" th:action="@{/login}">
+        <div class="submit">
+            <button type="submit">登录</button>
+        </div>
+    </form>
 
-<form action="" method="request" th:action="@{/logout}">
-    <button type="submit">注销</button>
-</form>
+    <form action="" method="request" th:action="@{/logout}">
+        <div class="submit">
+            <button type="submit">注销</button>
+        </div>
+    </form>
 
-<form action="" method="request" th:action="@{/addPost}">
-<button  type="submit">发帖</button>
-</form>
+    <form action="" method="request" th:action="@{/addPost}">
+        <div class="submit">
+            <button  type="submit">发帖</button>
+        </div>
+    </form>
+</div>
 
 </p>
 <p>
+
+</p>
+<table><tr><div class="button">
     <a th:href="@{/mainPage/time}"><button>按时间排序</button></a>
     <a th:href="@{/mainPage/comments}"><button>按评论数排序</button></a>
     <a th:href="@{/mainPage/upvotes}"><button>按点赞数排序</button></a>
     <a th:href="@{/mainPage/subscribed}"><button>只看关注</button></a>
-</p>
-<tr th:each="contact:${weblist}">
-    <td th:text="${contact.getWebid()}"></td>
-    <td th:text="${contact.getUsername()}"></td>
-    <td th:text="${contact.getTime()}"></td>
-    <td th:text="${contact.getContent()}"></td>
-    <td th:text="${contact.getCommentcount()}"></td>
-    <div>
-        <img th:src="${contact.getImagepath()}"/>
-    </div>
+</div></tr>
+    <tr th:each="contact:${weblist}">
+        <td th:text="'web id:'+${contact.getWebid()}"></td>
+        <td th:text="'用户名:'+${contact.getUsername()}"></td>
+        <td th:text="'时间:'+${contact.getTime()}"></td>
+        <td th:text="'正文:'+${contact.getContent()}"></td>
+        <td th:text="'评论数:'+${contact.getCommentcount()}"></td>
+        <td><div>
+            <img th:src="${contact.getImagepath()}" style="width: 102.4px;height: 76.8px"/>
+        </div></td>
 
-    <td th:text="${contact.getGoodcount()}"></td>
-    <a th:href="@{'/addGood/'+${contact.getWebid()}}"><button>赞</button></a>
-    <a th:href="@{'/comment/'+${contact.getWebid()}}"><button>评论</button></a>
-    <a th:href="@{'/subscribe/'+${contact.getUserid()}}"><button>关注作者</button></a>
-</tr>
+
+        <td th:text="'点赞数:'+${contact.getGoodcount()}"></td>
+        <td><a th:href="@{'/addGood/'+${contact.getWebid()}}"><button>赞</button></a>
+            <a th:href="@{'/comment/'+${contact.getWebid()}}"><button>评论</button></a>
+            <a th:href="@{'/subscribe/'+${contact.getUserid()}}"><button>关注作者</button></a></td>
+
+    </tr>
+</table>
+
 </body>
 </html>
