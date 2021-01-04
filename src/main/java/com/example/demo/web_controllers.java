@@ -9,7 +9,10 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -77,7 +80,7 @@ public class web_controllers {
 
 
     private weblistRepository WeblistRepository;
-
+    private int nowpage=0;
     @Autowired
     public void setWeblistRepository(weblistRepository WeblistRepository) {
         this.WeblistRepository = WeblistRepository;

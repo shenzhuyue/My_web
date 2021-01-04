@@ -18,6 +18,5 @@ public class WebConfig implements WebMvcConfigurer
         registration.addPathPatterns("/addGood/*");
         registration.addPathPatterns("/subscribe/*");
         registration.addPathPatterns("/mainPage/subscribed");
-
     }
 }
